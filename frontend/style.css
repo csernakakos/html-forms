@@ -1,0 +1,17 @@
+input:required,
+input:required:invalid {
+    box-shadow: 0 0 5px 1px red;
+}
+
+input:required:focus,
+input:required:valid {
+    box-shadow: none;
+}
+
+input:valid {
+    border: 1px solid green;
+}
+
+label > span {
+    color: red;
+}
