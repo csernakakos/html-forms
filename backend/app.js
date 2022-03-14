@@ -1,5 +1,7 @@
 const path = require("path");
 const express = require("express");
+const {validationResult} = require("express-validator");
+const {requireFirstName, requireLastName, requireEmail} = require("./validator");
 const PORT = 3001;
 const app = express();
 
@@ -11,11 +13,29 @@ app.get("/", (req,res) => {
     res.sendFile("../frontend/index.html", { root: __dirname });
 });
 
-app.post("/", (req, res) => {
+app.post("/",
+    [
+        requireFirstName,
+        requireLastName,
+        requireEmail,
+    ], 
+    (req, res) => {
+
     console.log("POST RECEIVED:", req.body);
 
+    const errors = validationResult(req);
+    console.log(errors);
+    if (!errors.isEmpty()) {
+        return res.json({
+            postReceived: true,
+            postAccepted: false,
+            errors
+        })
+    }
+ 
     res.json({
         postReceived: true,
+        postAccepted: true,
         data: req.body,
     })
 })

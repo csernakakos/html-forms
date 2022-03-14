@@ -14,4 +14,17 @@ input:valid {
 
 label > span {
     color: red;
+};
+
+.error {
+    width: 100%;
+    padding: 0;
+    box-sizing: border-box;
+    background: #900;
+    border-radius: 0 0 5px 5px;
+    color: white;
+}
+
+.error.active {
+    padding: 0.3rem;
 }
